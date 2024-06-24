@@ -1,0 +1,19 @@
+﻿@model ClientManager.Models.ClientNotesViewModel
+    
+
+@{
+    ViewData["Title"] = "ClientNotes";
+}
+
+
+@foreach (var Note in Model.Notes)
+{
+    if(Note != null)
+    {
+        <div>@Note.Note_Content</div><br />
+    }
+    else
+    {
+        <div>No current notes</div>
+    }
+}

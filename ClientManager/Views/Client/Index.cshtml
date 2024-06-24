@@ -1,0 +1,67 @@
+﻿@model List<Client>
+
+@{
+    ViewData["Title"] = "Client";
+}
+<div class="text-center">
+    <h1 class="display-4">Client</h1>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var clients in Model)
+        {
+            if (clients != null)
+            {
+                <tr>
+                    
+                    <td>@clients.FirstName</td>
+                    <td>@clients.LastName</td>
+                    <td>@clients.Email</td>
+                    <td>
+                        <div class="col-sm-4 d-grid">
+                            <a class="btn btn-outline-secondary" role="button" asp-controller="ClientNotes" asp-action="Index" asp-route-id="@clients.Id")>Notes</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-4 d-grid">
+                            <a class="btn btn-outline-secondary" role="button" asp-controller="Client" asp-action="Detail" asp-route-id="@clients.Id">Details</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-4 d-grid">
+                            <a class="btn btn-outline-secondary" role="button" asp-controller="Client" asp-action="Edit" asp-route-id="@clients.Id">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm-4 d-grid">
+                            <a class="btn btn-danger" role="button" asp-controller="Client" asp-action="Delete" asp-route-id="@clients.Id" onclick="return confirm('Are You Sure?')" >Delete</a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">Client data is null</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
