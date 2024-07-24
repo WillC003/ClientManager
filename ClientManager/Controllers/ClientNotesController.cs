@@ -18,6 +18,8 @@ namespace ClientManager.Controllers
         {
             _context = context;
         }
+
+        
         public IActionResult Index(int Id)
         {
             var clientNotes = _context.ClientNotes
@@ -48,6 +50,38 @@ namespace ClientManager.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+
+
+        public IActionResult Create(ClientNotesDto ClientNotesDto, int Id) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ClientNotesDto);
+            }
+
+            var client = _context.Client.Find(Id);
+
+            ClientNotes note = new ClientNotes()
+            {
+
+                Note_Content = ClientNotesDto.Note_Content,
+                ClientID = client.Id,
+                Updated_By = ClientNotesDto.Updated_By,
+                Created_By = ClientNotesDto.Created_By,
+                Created_Date = DateOnly.FromDateTime(DateTime.Now),
+                Updated_Date = DateOnly.FromDateTime(DateTime.Now),
+                Is_Deleted = false
+
+            };
+
+            _context.ClientNotes.Add(note);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index(cleint.Id)", "ClientNotes");
+
         }
 
     }

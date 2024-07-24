@@ -38,19 +38,11 @@ namespace ClientManager.Controllers
             }
 
             int newId = ClientDto.Id;
-            if (ClientDto.Id == 0)
-            {
-                // Ensure unique ID generation
-                Random rnd = new Random();
-                do
-                {
-                    newId = rnd.Next(1, int.MaxValue);
-                } while (_context.Client.Any(c => c.Id == newId));
-            }
+         
 
             Client client = new Client()
             {
-                //Id = newId,
+               
                 FirstName = ClientDto.FirstName,
                 LastName = ClientDto.LastName,
                 GymId = ClientDto.GymId,

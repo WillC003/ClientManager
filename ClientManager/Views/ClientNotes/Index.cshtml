@@ -5,15 +5,39 @@
     ViewData["Title"] = "ClientNotes";
 }
 
+<div class="text-center">
+    <h1 class="display-4">Client</h1>
+    <a class="btn btn-primary" asp-route-id="@Model.Client.Id" asp-action="Create">Create New</a>
+</div>
+<table class="table">
 
-@foreach (var Note in Model.Notes)
+    <thead>
+        <tr>
+
+            <th>Date Created</th>
+            <th>Note</th>
+            
+            
+
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var notes in Model.Notes)
 {
-    if(Note != null)
+    if (notes != null)
     {
-        <div>@Note.Note_Content</div><br />
+        <tr>
+            <td>@notes.Created_Date</td>
+            <td>@notes.Note_Content</td>
+
+        </tr>
     }
     else
     {
-        <div>No current notes</div>
+        <tr>
+            <td colspan="4">Client data is null</td>
+        </tr>
     }
 }
+    </tbody>
+</table>
